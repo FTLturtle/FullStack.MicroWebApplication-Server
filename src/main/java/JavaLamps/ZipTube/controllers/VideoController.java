@@ -9,35 +9,40 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class VideoController {
-    private VideoService service;
+    private VideoService videoService;
 
     @Autowired
-    public VideoController(VideoService service) {
-        this.service = service;
+    public VideoController(VideoService videoService) {
+        this.videoService = videoService;
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return new ResponseEntity<>("testSucceeded", HttpStatus.OK);
     }
 
     @GetMapping("/departments")
     public ResponseEntity<Iterable<Video>> index() {
-        return new ResponseEntity<>(service.index(), HttpStatus.OK);
+        return new ResponseEntity<>(videoService.index(), HttpStatus.OK);
     }
 
     @GetMapping("/departments/{id}")
     public ResponseEntity<Video> show(@PathVariable Long id) {
-        return new ResponseEntity<>(service.show(id), HttpStatus.OK);
+        return new ResponseEntity<>(videoService.show(id), HttpStatus.OK);
     }
 
     @PostMapping("/departments")
     public ResponseEntity<Video> create(@RequestBody Video video) {
-        return new ResponseEntity<>(service.create(video), HttpStatus.CREATED);
+        return new ResponseEntity<>(videoService.create(video), HttpStatus.CREATED);
     }
 
     @PutMapping("/departments/{id}")
     public ResponseEntity<Video> update(@PathVariable Long id, @RequestBody Video video) {
-        return new ResponseEntity<>(service.update(id, video), HttpStatus.OK);
+        return new ResponseEntity<>(videoService.update(id, video), HttpStatus.OK);
     }
 
     @DeleteMapping("/departments/{id}")
     public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
-        return new ResponseEntity<>(service.delete(id), HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(videoService.delete(id), HttpStatus.NO_CONTENT);
     }
 }
