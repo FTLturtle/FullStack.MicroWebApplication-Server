@@ -1,5 +1,5 @@
 # Micro Web Application - Server
-* **Objective** - to create an implementation of a small web service
+* **Objective** - to create an implementation of a small web videoService
 * **Purpose** - to demonstrate the construction of a full-stacked web-application
 
 ## Developmental Notes

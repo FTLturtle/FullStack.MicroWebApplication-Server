@@ -19,8 +19,8 @@ public class Video {
     @NotNull
     private String description;
 
-    @NotNull
-    private Date uploadDate;
+//    @NotNull
+//    private Date uploadDate;
 
     public Video(String idString) {
         this.id = Long.parseLong(idString);
@@ -30,7 +30,7 @@ public class Video {
         this.uri = uri;
         this.title = title;
         this.description = description;
-        this.uploadDate = uploadDate;
+//        this.uploadDate = uploadDate;
     }
 
     public Long getId() {
@@ -65,11 +65,11 @@ public class Video {
         this.description = description;
     }
 
-    public Date getUploadDate() {
-        return uploadDate;
-    }
+//    public Date getUploadDate() {
+//        return uploadDate;
+//    }
 
-    public void setUploadDate(Date uploadDate) {
-        this.uploadDate = uploadDate;
-    }
+//    public void setUploadDate(Date uploadDate) {
+//        this.uploadDate = uploadDate;
+//    }
 }
