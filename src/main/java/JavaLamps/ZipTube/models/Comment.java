@@ -23,7 +23,7 @@ public class Comment {
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Video video;
 
-    public Comment(@NotNull String body, @NotNull String posterName, @NotNull Date postDate, @NotNull Video video) {
+    public Comment(@NotNull String body, @NotNull String posterName,/* @NotNull Date postDate,*/ @NotNull Video video) {
         this.body = body;
         this.posterName = posterName;
 //        this.postDate = postDate;

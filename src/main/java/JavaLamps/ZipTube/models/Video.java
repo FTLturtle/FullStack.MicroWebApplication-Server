@@ -26,7 +26,7 @@ public class Video {
         this.id = Long.parseLong(idString);
     }
 
-    public Video(@NotNull String uri, @NotNull String title, @NotNull String description, @NotNull Date uploadDate) {
+    public Video(@NotNull String uri, @NotNull String title, @NotNull String description/*, @NotNull Date uploadDate*/) {
         this.uri = uri;
         this.title = title;
         this.description = description;
