@@ -1,7 +1,6 @@
 package JavaLamps.ZipTube.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -10,23 +9,22 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
 
-    @NotNull
     private String body;
 
-    @NotNull
     private String posterName;
 
-//    @NotNull
-//    private Date postDate;
+    private Date postDate;
 
-    @NotNull
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Video video;
 
-    public Comment(@NotNull String body, @NotNull String posterName,/* @NotNull Date postDate,*/ @NotNull Video video) {
+    public Comment() {
+    }
+
+    public Comment(String body, String posterName, Date postDate, Video video) {
         this.body = body;
         this.posterName = posterName;
-//        this.postDate = postDate;
+        this.postDate = postDate;
         this.video = video;
     }
 
@@ -54,13 +52,13 @@ public class Comment {
         this.posterName = posterName;
     }
 
-//    public Date getPostDate() {
-//        return postDate;
-//    }
+    public Date getPostDate() {
+        return postDate;
+    }
 
-//    public void setPostDate(Date postDate) {
-//        this.postDate = postDate;
-//    }
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
+    }
 
     public Video getVideo() {
         return video;

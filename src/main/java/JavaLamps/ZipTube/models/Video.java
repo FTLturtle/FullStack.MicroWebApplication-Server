@@ -1,7 +1,6 @@
 package JavaLamps.ZipTube.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -10,27 +9,26 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @NotNull
     private String uri;
 
-    @NotNull
     private String title;
 
-    @NotNull
     private String description;
 
-//    @NotNull
-//    private Date uploadDate;
+    private Date uploadDate;
+
+    public Video() {
+    }
 
     public Video(String idString) {
         this.id = Long.parseLong(idString);
     }
 
-    public Video(@NotNull String uri, @NotNull String title, @NotNull String description/*, @NotNull Date uploadDate*/) {
+    public Video(String uri, String title, String description, Date uploadDate) {
         this.uri = uri;
         this.title = title;
         this.description = description;
-//        this.uploadDate = uploadDate;
+        this.uploadDate = uploadDate;
     }
 
     public Long getId() {
@@ -65,11 +63,11 @@ public class Video {
         this.description = description;
     }
 
-//    public Date getUploadDate() {
-//        return uploadDate;
-//    }
+    public Date getUploadDate() {
+        return uploadDate;
+    }
 
-//    public void setUploadDate(Date uploadDate) {
-//        this.uploadDate = uploadDate;
-//    }
+    public void setUploadDate(Date uploadDate) {
+        this.uploadDate = uploadDate;
+    }
 }
