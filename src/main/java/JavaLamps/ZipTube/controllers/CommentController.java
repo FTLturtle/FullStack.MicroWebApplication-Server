@@ -16,27 +16,27 @@ public class CommentController {
         this.service = service;
     }
 
-    @GetMapping("/employees")
+    @GetMapping("/comments")
     public ResponseEntity<Iterable<Comment>> index() {
         return new ResponseEntity<>(service.index(), HttpStatus.OK);
     }
 
-    @GetMapping("/employees/{id}")
+    @GetMapping("/comments/{id}")
     public ResponseEntity<Comment> show(@PathVariable Long id) {
         return new ResponseEntity<>(service.show(id), HttpStatus.OK);
     }
 
-    @PostMapping("/employees")
+    @PostMapping("/comments")
     public ResponseEntity<Comment> create(@RequestBody Comment comment) {
         return new ResponseEntity<>(service.create(comment), HttpStatus.CREATED);
     }
 
-    @PutMapping("/employees/{id}")
+    @PutMapping("/comments/{id}")
     public ResponseEntity<Comment> update(@PathVariable Long id, @RequestBody Comment comment) {
         return new ResponseEntity<>(service.update(id, comment), HttpStatus.OK);
     }
 
-    @DeleteMapping("/employees/{id}")
+    @DeleteMapping("/comments/{id}")
     public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
         return new ResponseEntity<>(service.delete(id), HttpStatus.NO_CONTENT);
     }

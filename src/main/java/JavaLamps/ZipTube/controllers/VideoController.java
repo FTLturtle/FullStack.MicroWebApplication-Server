@@ -21,27 +21,27 @@ public class VideoController {
         return new ResponseEntity<>("testSucceeded", HttpStatus.OK);
     }
 
-    @GetMapping("/departments")
+    @GetMapping("/videos")
     public ResponseEntity<Iterable<Video>> index() {
         return new ResponseEntity<>(videoService.index(), HttpStatus.OK);
     }
 
-    @GetMapping("/departments/{id}")
+    @GetMapping("/videos/{id}")
     public ResponseEntity<Video> show(@PathVariable Long id) {
         return new ResponseEntity<>(videoService.show(id), HttpStatus.OK);
     }
 
-    @PostMapping("/departments")
+    @PostMapping("/videos")
     public ResponseEntity<Video> create(@RequestBody Video video) {
         return new ResponseEntity<>(videoService.create(video), HttpStatus.CREATED);
     }
 
-    @PutMapping("/departments/{id}")
+    @PutMapping("/videos/{id}")
     public ResponseEntity<Video> update(@PathVariable Long id, @RequestBody Video video) {
         return new ResponseEntity<>(videoService.update(id, video), HttpStatus.OK);
     }
 
-    @DeleteMapping("/departments/{id}")
+    @DeleteMapping("/videos/{id}")
     public ResponseEntity<Boolean> destroy(@PathVariable Long id) {
         return new ResponseEntity<>(videoService.delete(id), HttpStatus.NO_CONTENT);
     }
