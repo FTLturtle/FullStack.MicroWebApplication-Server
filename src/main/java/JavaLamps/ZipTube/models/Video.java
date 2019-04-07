@@ -20,10 +20,6 @@ public class Video {
 
     private Date uploadDate;
 
-    @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference
-    private Set<Comment> comments;
-
     public Video() {
     }
 
@@ -32,12 +28,11 @@ public class Video {
     }
 
 
-    public Video(String uri, String title, String description, Date uploadDate, Set<Comment> comments) {
+    public Video(String uri, String title, String description, Date uploadDate) {
         this.uri = uri;
         this.title = title;
         this.description = description;
         this.uploadDate = uploadDate;
-        this.comments = comments;
     }
 
     public Long getId() {
@@ -78,13 +73,5 @@ public class Video {
 
     public void setUploadDate(Date uploadDate) {
         this.uploadDate = uploadDate;
-    }
-
-    public Set<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(Set<Comment> comments) {
-        this.comments = comments;
     }
 }
