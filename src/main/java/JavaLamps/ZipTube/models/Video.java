@@ -31,14 +31,6 @@ public class Video {
         this.id = Long.parseLong(idString);
     }
 
-    public Video(String uri, String title, String description, Date uploadDate, Set<Comment> comments) {
-        this.uri = uri;
-        this.title = title;
-        this.description = description;
-        this.uploadDate = uploadDate;
-        this.comments = comments;
-    }
-
     public Long getId() {
         return id;
     }
