@@ -7,7 +7,7 @@ import java.util.Date;
 public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    long id;
+    Long id;
 
     private String body;
 
@@ -15,7 +15,7 @@ public class Comment {
 
     private Date postDate;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Video video;
 
     public Comment() {
