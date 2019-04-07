@@ -7,7 +7,7 @@ import java.util.Set;
 @Entity
 public class Video {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
     private String uri;
@@ -18,8 +18,8 @@ public class Video {
 
     private Date uploadDate;
 
-//    @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
-//    private Set<Comment> comments;
+    @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Comment> comments;
 
     public Video() {
     }
@@ -29,11 +29,12 @@ public class Video {
     }
 
 
-    public Video(String uri, String title, String description, Date uploadDate) {
+    public Video(String uri, String title, String description, Date uploadDate, Set<Comment> comments) {
         this.uri = uri;
         this.title = title;
         this.description = description;
         this.uploadDate = uploadDate;
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -74,5 +75,13 @@ public class Video {
 
     public void setUploadDate(Date uploadDate) {
         this.uploadDate = uploadDate;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 }
