@@ -16,11 +16,6 @@ public class VideoController {
         this.videoService = videoService;
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test() {
-        return new ResponseEntity<>("testSucceeded", HttpStatus.OK);
-    }
-
     @GetMapping("/videos")
     public ResponseEntity<Iterable<Video>> index() {
         return new ResponseEntity<>(videoService.index(), HttpStatus.OK);

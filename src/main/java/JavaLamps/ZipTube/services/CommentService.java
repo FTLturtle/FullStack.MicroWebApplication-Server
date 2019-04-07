@@ -6,7 +6,7 @@ import JavaLamps.ZipTube.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class CommentService {
@@ -37,12 +37,10 @@ public class CommentService {
     }
 
     public Comment update(Long id, Comment newCommentData) {
-        Optional<Comment> employee = commentRepository.findById(id);
-        if(employee.isPresent()) {
-            newCommentData.setId(employee.get().getId());
-        } else {
-            newCommentData.setId(id);
-        }
+        if (!commentRepository.existsById(id))
+            throw new NoSuchElementException();
+
+        newCommentData.setId(id);
         return commentRepository.save(newCommentData);
     }
 

@@ -1,10 +1,7 @@
 package JavaLamps.ZipTube.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Entity
 public class Video {

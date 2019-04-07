@@ -1,6 +1,5 @@
 package JavaLamps.ZipTube.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -19,7 +18,7 @@ public class Comment {
 
     private Date postDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Video video;
 

@@ -6,7 +6,7 @@ import JavaLamps.ZipTube.repositories.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Service
 public class VideoService {
@@ -30,12 +30,10 @@ public class VideoService {
     }
 
     public Video update(Long id, Video newVideoData) {
-        Optional<Video> department = videoRepository.findById(id);
-        if(department.isPresent()) {
-            newVideoData.setId(department.get().getId());
-        } else {
-            newVideoData.setId(id);
-        }
+        if (!videoRepository.existsById(id))
+            throw new NoSuchElementException();
+
+        newVideoData.setId(id);
         return videoRepository.save(newVideoData);
     }
 
