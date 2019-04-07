@@ -20,7 +20,7 @@ public class Video {
 
     private Date uploadDate;
 
-    @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonBackReference
     private Set<Comment> comments;
 
