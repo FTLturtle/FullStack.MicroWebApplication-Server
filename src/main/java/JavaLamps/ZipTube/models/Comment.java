@@ -6,7 +6,7 @@ import java.util.Date;
 @Entity
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     private String body;

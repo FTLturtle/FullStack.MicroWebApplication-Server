@@ -2,11 +2,12 @@ package JavaLamps.ZipTube.models;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 public class Video {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
     private String uri;
@@ -16,6 +17,9 @@ public class Video {
     private String description;
 
     private Date uploadDate;
+
+    @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<Comment> comments;
 
     public Video() {
     }
