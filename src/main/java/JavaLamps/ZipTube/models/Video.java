@@ -1,6 +1,6 @@
 package JavaLamps.ZipTube.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,8 +20,8 @@ public class Video {
 
     private Date uploadDate;
 
-    @OneToMany(orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonBackReference
+    @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Comment> comments;
 
     public Video() {
@@ -29,6 +29,15 @@ public class Video {
 
     public Video(String idString) {
         this.id = Long.parseLong(idString);
+    }
+
+
+    public Video(String uri, String title, String description, Date uploadDate, Set<Comment> comments) {
+        this.uri = uri;
+        this.title = title;
+        this.description = description;
+        this.uploadDate = uploadDate;
+        this.comments = comments;
     }
 
     public Long getId() {
