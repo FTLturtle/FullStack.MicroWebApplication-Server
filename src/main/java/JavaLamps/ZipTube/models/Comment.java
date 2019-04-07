@@ -1,5 +1,7 @@
 package JavaLamps.ZipTube.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ public class Comment {
     private Date postDate;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference
     private Video video;
 
     public Comment() {
