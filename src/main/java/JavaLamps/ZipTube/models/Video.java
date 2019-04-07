@@ -1,6 +1,6 @@
 package JavaLamps.ZipTube.models;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,7 +21,7 @@ public class Video {
     private Date uploadDate;
 
     @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonBackReference
     private Set<Comment> comments;
 
     public Video() {
