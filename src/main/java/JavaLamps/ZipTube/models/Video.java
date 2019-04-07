@@ -18,8 +18,8 @@ public class Video {
 
     private Date uploadDate;
 
-    @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
-    private Set<Comment> comments;
+//    @OneToMany(mappedBy = "video", orphanRemoval = true, fetch = FetchType.LAZY)
+//    private Set<Comment> comments;
 
     public Video() {
     }
