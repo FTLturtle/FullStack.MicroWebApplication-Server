@@ -24,7 +24,6 @@ public class Comment {
     public Comment() {
     }
 
-
     public Comment(String body, String posterName, Date postDate, Video video) {
         this.body = body;
         this.posterName = posterName;
