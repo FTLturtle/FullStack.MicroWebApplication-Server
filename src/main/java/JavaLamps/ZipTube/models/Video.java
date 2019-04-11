@@ -1,6 +1,7 @@
 package JavaLamps.ZipTube.models;
 
 import javax.persistence.*;
+import java.net.URL;
 import java.util.Date;
 
 @Entity
@@ -9,7 +10,9 @@ public class Video {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    private String uri;
+    private String url;
+
+    private String fileName;
 
     private String title;
 
@@ -24,9 +27,9 @@ public class Video {
         this.id = Long.parseLong(idString);
     }
 
-
-    public Video(String uri, String title, String description, Date uploadDate) {
-        this.uri = uri;
+    public Video(String url, String fileName, String title, String description, Date uploadDate) {
+        this.url = url;
+        this.fileName = fileName;
         this.title = title;
         this.description = description;
         this.uploadDate = uploadDate;
@@ -40,12 +43,20 @@ public class Video {
         this.id = id;
     }
 
-    public String getUri() {
-        return uri;
+    public String getUrl() {
+        return url;
     }
 
-    public void setUri(String uri) {
-        this.uri = uri;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     public String getTitle() {

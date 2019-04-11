@@ -41,4 +41,24 @@ public class VideoService {
         videoRepository.deleteById(id);
         return true;
     }
+
+    public Video updateTitle(Long id, String newTitle) {
+        if (!videoRepository.existsById(id))
+            throw new NoSuchElementException();
+
+        Video video = videoRepository.findById(id).get();
+        video.setTitle(newTitle);
+         return videoRepository.save(video);
+    }
+
+    public Video updateDescription(Long id, String newDescription) {
+        if (!videoRepository.existsById(id))
+            throw new NoSuchElementException();
+
+        Video video = videoRepository.findById(id).get();
+        video.setDescription(newDescription);
+        return videoRepository.save(video);
+
+    }
+
 }

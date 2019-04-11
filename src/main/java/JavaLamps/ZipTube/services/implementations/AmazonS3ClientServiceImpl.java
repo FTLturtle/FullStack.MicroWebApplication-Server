@@ -4,6 +4,9 @@ import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
+import com.amazonaws.services.s3.transfer.Upload;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.URL;
 
 @Component
 public class AmazonS3ClientServiceImpl implements AmazonS3ClientService {
@@ -35,10 +39,7 @@ public class AmazonS3ClientServiceImpl implements AmazonS3ClientService {
         this.awsS3AudioBucket = awsS3AudioBucket;
     }
 
-    @Async
-    public void uploadFileToS3Bucket(MultipartFile multipartFile, boolean enablePublicReadAccess) {
-        String fileName = multipartFile.getOriginalFilename();
-
+    public void uploadFileToS3Bucket(MultipartFile multipartFile, String fileName, boolean enablePublicReadAccess) {
         try {
             //creating the file in the server (temporarily)
             File file = new File(fileName);
@@ -46,15 +47,25 @@ public class AmazonS3ClientServiceImpl implements AmazonS3ClientService {
             fos.write(multipartFile.getBytes());
             fos.close();
 
+            //Trial
+            TransferManager transMan = TransferManagerBuilder.standard()
+                    .withS3Client(this.amazonS3)
+                    .build();
+
             PutObjectRequest putObjectRequest = new PutObjectRequest(this.awsS3AudioBucket, fileName, file);
 
             if (enablePublicReadAccess) {
                 putObjectRequest.withCannedAcl(CannedAccessControlList.PublicRead);
             }
             this.amazonS3.putObject(putObjectRequest);
+
+            Upload upload = transMan.upload(putObjectRequest);
+            upload.waitForCompletion();
+
             //removing the file created in the server
+
             file.delete();
-        } catch (IOException | AmazonServiceException ex) {
+        } catch (IOException | AmazonServiceException | InterruptedException ex) {
             logger.error("error [" + ex.getMessage() + "] occurred while uploading [" + fileName + "] ");
         }
     }
@@ -66,5 +77,9 @@ public class AmazonS3ClientServiceImpl implements AmazonS3ClientService {
         } catch (AmazonServiceException ex) {
             logger.error("error [" + ex.getMessage() + "] occurred while removing [" + fileName + "] ");
         }
+    }
+
+    public String getFileUrl(String key) {
+        return amazonS3.getUrl(awsS3AudioBucket, key).toString();
     }
 }
