@@ -21,20 +21,24 @@ public class VideoService {
         return videoRepository.findAll();
     }
 
-    public Video show(Long id) {
-        return videoRepository.findById(id).get();
-    }
-
     public Video create(Video video) {
         return videoRepository.save(video);
     }
 
-    public Video update(Long id, Video newVideoData) {
-        if (!videoRepository.existsById(id))
-            throw new NoSuchElementException();
+    public Video show(Long id) {
+        checkIfValidId(id);
+        return videoRepository.findById(id).get();
+    }
 
+    public Video update(Long id, Video newVideoData) {
+        checkIfValidId(id);
         newVideoData.setId(id);
         return videoRepository.save(newVideoData);
+    }
+
+    private void checkIfValidId(Long id) {
+        if (!videoRepository.existsById(id))
+            throw new NoSuchElementException();
     }
 
     public Boolean delete(Long id) {
@@ -43,19 +47,13 @@ public class VideoService {
     }
 
     public Video updateTitle(Long id, String newTitle) {
-        if (!videoRepository.existsById(id))
-            throw new NoSuchElementException();
-
-        Video video = videoRepository.findById(id).get();
+        Video video = show(id);
         video.setTitle(newTitle);
          return videoRepository.save(video);
     }
 
     public Video updateDescription(Long id, String newDescription) {
-        if (!videoRepository.existsById(id))
-            throw new NoSuchElementException();
-
-        Video video = videoRepository.findById(id).get();
+        Video video = show(id);
         video.setDescription(newDescription);
         return videoRepository.save(video);
 
