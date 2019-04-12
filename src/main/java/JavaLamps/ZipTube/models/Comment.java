@@ -4,6 +4,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.swing.plaf.synth.Region;
 import java.util.Date;
 
 @Entity
@@ -31,7 +32,9 @@ public class Comment {
         this.posterName = posterName;
         this.postDate = postDate;
         this.video = video;
+
     }
+
 
     public Long getId() {
         return id;
