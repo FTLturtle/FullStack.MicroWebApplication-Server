@@ -2,8 +2,9 @@
 ## Developmental Notes
 ### Tech Stack
 * **Frontend** - Angular
-* **Business Logic** - Java
-* **Data Layer** - MySQL
+* **Business Logic** - Java/Spring Boot
+* **Data Layer** - PostgreSQL
+* **File Server** - AWS S3 Bucket
 * **Cloud** - Heroku
 
 ### Installation
@@ -17,9 +18,6 @@
 	* `brew tap heroku/brew && brew install heroku`
 
 <hr><hr>
-
-
-
 
 ### Video Library Application
 
