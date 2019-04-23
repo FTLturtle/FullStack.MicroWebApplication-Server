@@ -21,7 +21,7 @@
 
 ### Video Library Application
 
-#### User Stories to Fulfill  
+#### User Stories fulfilled 
 * As a client, (not logged in) I
 	* can upload new videos
 	* can view list of all videos
