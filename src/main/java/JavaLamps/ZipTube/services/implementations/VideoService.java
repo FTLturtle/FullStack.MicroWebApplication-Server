@@ -1,5 +1,4 @@
-package JavaLamps.ZipTube.services;
-
+package JavaLamps.ZipTube.services.implementations;
 
 import JavaLamps.ZipTube.models.Video;
 import JavaLamps.ZipTube.repositories.VideoRepository;
@@ -17,15 +16,15 @@ public class VideoService {
         this.videoRepository = videoRepository;
     }
 
-    public Iterable<Video> index() {
+    public Iterable<Video> findAll() {
         return videoRepository.findAll();
     }
 
-    public Video create(Video video) {
+    public Video save(Video video) {
         return videoRepository.save(video);
     }
 
-    public Video show(Long id) {
+    public Video findById(Long id) {
         checkIfValidId(id);
         return videoRepository.findById(id).get();
     }
@@ -36,27 +35,28 @@ public class VideoService {
         return videoRepository.save(newVideoData);
     }
 
-    private void checkIfValidId(Long id) {
-        if (!videoRepository.existsById(id))
-            throw new NoSuchElementException();
-    }
-
-    public Boolean delete(Long id) {
+    public Boolean deleteById(Long id) {
+        checkIfValidId(id);
         videoRepository.deleteById(id);
         return true;
     }
 
     public Video updateTitle(Long id, String newTitle) {
-        Video video = show(id);
+        checkIfValidId(id);
+        Video video = findById(id);
         video.setTitle(newTitle);
-         return videoRepository.save(video);
+        return videoRepository.save(video);
     }
 
     public Video updateDescription(Long id, String newDescription) {
-        Video video = show(id);
+        checkIfValidId(id);
+        Video video = findById(id);
         video.setDescription(newDescription);
         return videoRepository.save(video);
-
     }
 
+    public void checkIfValidId(Long id) {
+        if (!videoRepository.existsById(id))
+            throw new NoSuchElementException();
+    }
 }

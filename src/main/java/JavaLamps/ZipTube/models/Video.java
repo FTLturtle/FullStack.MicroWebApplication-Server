@@ -1,7 +1,6 @@
 package JavaLamps.ZipTube.models;
 
 import javax.persistence.*;
-import java.net.URL;
 import java.util.Date;
 
 @Entity
@@ -23,8 +22,8 @@ public class Video {
     public Video() {
     }
 
-    public Video(String idString) {
-        this.id = Long.parseLong(idString);
+    public Video(Long id) {
+        this.id = id;
     }
 
     public Video(String url, String fileName, String title, String description, Date uploadDate) {

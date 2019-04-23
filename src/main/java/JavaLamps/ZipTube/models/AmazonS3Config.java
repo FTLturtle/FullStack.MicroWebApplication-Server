@@ -1,5 +1,10 @@
 package JavaLamps.ZipTube.models;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.s3.transfer.TransferManager;
+import com.amazonaws.services.s3.transfer.TransferManagerBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,8 +16,7 @@ import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 
 @Configuration
-public class AmazonS3Config
-{
+public class AmazonS3Config {
     @Value("${aws.access.key.id}")
     private String awsKeyId;
 
@@ -49,5 +53,21 @@ public class AmazonS3Config
     @Bean(name = "awsS3AudioBucket")
     public String getAWSS3AudioBucket() {
         return awsS3AudioBucket;
+    }
+
+    @Bean(name = "amazonS3")
+    @Autowired
+    public AmazonS3 getAmazonS3(Region awsRegion, AWSCredentialsProvider awsCredentialsProvider) {
+        return AmazonS3ClientBuilder.standard()
+                .withCredentials(awsCredentialsProvider)
+                .withRegion(awsRegion.getName()).build();
+    }
+
+    @Bean(name = "transferManager")
+    @Autowired
+    public TransferManager getTransferManager(AmazonS3 amazonS3) {
+        return TransferManagerBuilder.standard()
+                .withS3Client(amazonS3)
+                .build();
     }
 }
