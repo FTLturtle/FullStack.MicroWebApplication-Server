@@ -22,15 +22,15 @@ import java.io.IOException;
 
 @Component
 public class AmazonS3ClientServiceImplementation implements AmazonS3ClientService {
-    private String awsS3AudioBucket;
+    private String awsS3VideoBucket;
     private AmazonS3 amazonS3;
     private static final Logger logger = LoggerFactory.getLogger(AmazonS3ClientServiceImplementation.class);
     private TransferManager transferManager;
 
     @Autowired
-    public AmazonS3ClientServiceImplementation(AmazonS3 amazonS3, String awsS3AudioBucket, TransferManager transferManager) {
+    public AmazonS3ClientServiceImplementation(AmazonS3 amazonS3, String awsS3VideoBucket, TransferManager transferManager) {
         this.amazonS3 = amazonS3;
-        this.awsS3AudioBucket = awsS3AudioBucket;
+        this.awsS3VideoBucket = awsS3VideoBucket;
         this.transferManager = transferManager;
     }
 
@@ -43,7 +43,7 @@ public class AmazonS3ClientServiceImplementation implements AmazonS3ClientServic
             fos.close();
 
             //uploading file to amazon s3 bucket
-            PutObjectRequest putObjectRequest = new PutObjectRequest(awsS3AudioBucket, fileName, file);
+            PutObjectRequest putObjectRequest = new PutObjectRequest(awsS3VideoBucket, fileName, file);
             if (enablePublicReadAccess) {
                 putObjectRequest.withCannedAcl(CannedAccessControlList.PublicRead);
             }
@@ -63,13 +63,13 @@ public class AmazonS3ClientServiceImplementation implements AmazonS3ClientServic
     @Async
     public void deleteFileFromS3Bucket(String fileName) {
         try {
-            amazonS3.deleteObject(new DeleteObjectRequest(awsS3AudioBucket, fileName));
+            amazonS3.deleteObject(new DeleteObjectRequest(awsS3VideoBucket, fileName));
         } catch (AmazonServiceException ex) {
             logger.error("error [" + ex.getMessage() + "] occurred while removing [" + fileName + "] ");
         }
     }
 
     public String getFileUrl(String key) {
-        return amazonS3.getUrl(awsS3AudioBucket, key).toString();
+        return amazonS3.getUrl(awsS3VideoBucket, key).toString();
     }
 }

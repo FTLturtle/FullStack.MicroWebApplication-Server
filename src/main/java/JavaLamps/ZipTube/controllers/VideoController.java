@@ -37,7 +37,6 @@ public class VideoController {
 
     @PostMapping("/videos/{titleDescription}")
     public ResponseEntity<Video> createVideo(@RequestPart MultipartFile file, @PathVariable List<String> titleDescription) {
-        System.out.println(titleDescription);
         String fileName = file.getOriginalFilename();
         this.amazonS3ClientService.uploadFileToS3Bucket(file, fileName, true);
         Date date = new Date();
@@ -46,11 +45,6 @@ public class VideoController {
         Video video = new Video(url, fileName, titleDescription.get(0), titleDescription.get(1), date);
         return new ResponseEntity<>(videoService.save(video), HttpStatus.CREATED);
     }
-
-//    @PutMapping("/videos/{id}")
-//    public ResponseEntity<Video> update(@PathVariable Long id, @RequestBody Video video) {
-//        return new ResponseEntity<>(videoService.update(id, video), HttpStatus.OK);
-//    }
 
     @PutMapping("/videos/{id}/title")
     public ResponseEntity<Video> updateVideoTitle(@PathVariable Long id, @RequestParam String title) {
