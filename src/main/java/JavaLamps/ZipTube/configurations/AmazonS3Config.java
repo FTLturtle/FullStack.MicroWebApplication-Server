@@ -1,4 +1,4 @@
-package JavaLamps.ZipTube.models;
+package JavaLamps.ZipTube.configurations;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -27,7 +27,7 @@ public class AmazonS3Config {
     private String awsRegion;
 
     @Value("${aws.s3.audio.bucket}")
-    private String awsS3AudioBucket;
+    private String awsS3VideoBucket;
 
     @Bean(name = "awsKeyId")
     public String getAWSKeyId() {
@@ -50,9 +50,9 @@ public class AmazonS3Config {
         return new AWSStaticCredentialsProvider(awsCredentials);
     }
 
-    @Bean(name = "awsS3AudioBucket")
+    @Bean(name = "awsS3VideoBucket")
     public String getAWSS3AudioBucket() {
-        return awsS3AudioBucket;
+        return awsS3VideoBucket;
     }
 
     @Bean(name = "amazonS3")
