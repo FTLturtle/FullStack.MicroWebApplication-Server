@@ -26,7 +26,7 @@ public class AmazonS3Config {
     @Value("${aws.region}")
     private String awsRegion;
 
-    @Value("${aws.s3.audio.bucket}")
+    @Value("${aws.s3.video.bucket}")
     private String awsS3VideoBucket;
 
     @Bean(name = "awsKeyId")
