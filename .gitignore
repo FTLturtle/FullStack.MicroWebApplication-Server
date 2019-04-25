@@ -177,3 +177,7 @@ target/
 .DS_Store?
 ehthumbs.db
 Thumbs.db
+
+# Project specific files #
+##########################
+application-dev.properties

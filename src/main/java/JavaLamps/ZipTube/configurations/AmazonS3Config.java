@@ -51,7 +51,7 @@ public class AmazonS3Config {
     }
 
     @Bean(name = "awsS3VideoBucket")
-    public String getAWSS3AudioBucket() {
+    public String getAWSS3VideoBucket() {
         return awsS3VideoBucket;
     }
 
