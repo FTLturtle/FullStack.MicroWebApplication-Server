@@ -89,8 +89,10 @@ public class EndpointVideoControllerTest {
 
         String expectedContent = mapToJson(video);
         this.mvc.perform(MockMvcRequestBuilders
-                .multipart("/videos/some title,some description")
+                .multipart("/videos")
                 .file(mockMultipartFile)
+                .param("title", "some title")
+                .param("description", "some description")
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isCreated())

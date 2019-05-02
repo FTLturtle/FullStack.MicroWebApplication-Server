@@ -68,7 +68,7 @@ public class VideoControllerTest {
         ResponseEntity<Video> expected = new ResponseEntity<>(returnVideo, HttpStatus.CREATED);
 
         // When
-        ResponseEntity<Video> actual = videoController.createVideo(new MockMultipartFile("fileName", new byte[0]), new ArrayList<>(Arrays.asList("some title", "some description")));
+        ResponseEntity<Video> actual = videoController.createVideo(new MockMultipartFile("fileName", new byte[0]), "some title", "some description");
 
         // Then
         Assert.assertEquals(expected, actual);

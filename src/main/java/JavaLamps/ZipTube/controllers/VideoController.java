@@ -35,14 +35,14 @@ public class VideoController {
         return new ResponseEntity<>(videoService.findById(id), HttpStatus.OK);
     }
 
-    @PostMapping("/videos/{titleDescription}")
-    public ResponseEntity<Video> createVideo(@RequestPart MultipartFile file, @PathVariable List<String> titleDescription) {
+    @PostMapping("/videos")
+    public ResponseEntity<Video> createVideo(@RequestPart MultipartFile file, @RequestParam String title, @RequestParam String description) {
         String fileName = file.getOriginalFilename();
         this.amazonS3ClientService.uploadFileToS3Bucket(file, fileName, true);
         Date date = new Date();
         String url = amazonS3ClientService.getFileUrl(fileName);
 
-        Video video = new Video(url, fileName, titleDescription.get(0), titleDescription.get(1), date);
+        Video video = new Video(url, fileName, title, description, date);
         return new ResponseEntity<>(videoService.save(video), HttpStatus.CREATED);
     }
 
